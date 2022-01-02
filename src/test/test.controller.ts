@@ -9,9 +9,6 @@ export class TestController {
 
   @Get(':testId')
   async testFunc(@Param('testId') testId: number): Promise<string> {
-    if (typeof testId !== 'number') {
-      return `testId Type is number`;
-    }
     return this.testService.testService(testId);
   }
 }

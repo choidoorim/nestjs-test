@@ -15,4 +15,11 @@ describe('TestService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  describe('test/:testId', () => {
+    it('should return `Hello Test testId`', async () => {
+      const testId = 1;
+      expect(await service.testService(testId)).toBe(`Hello Test ${testId}`);
+    });
+  });
 });
