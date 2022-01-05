@@ -5,6 +5,7 @@ import {
   Query,
   Post,
   Body,
+  HttpStatus,
 } from '@nestjs/common';
 import { ProductService, Product } from './product.service';
 import { CreateProductDto } from './dto/createProduct.dto';
@@ -21,7 +22,13 @@ export class ProductController {
   }
 
   @Get('test')
-  async findProductByQuery(@Query('id', ParseIntPipe) productId: number) {
+  async findProductByQuery(
+    @Query(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    productId: number,
+  ) {
     const result = await this.productService.findProductById(productId);
     return result;
   }
