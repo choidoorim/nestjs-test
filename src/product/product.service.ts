@@ -16,14 +16,10 @@ export class ProductService {
   };
 
   findProductById = async (id: number) => {
-    for (const product of this.product) {
-      if (product.id == id) {
-        return product;
-      }
-    }
+    return this.product.find((proudct) => proudct.id === id);
   };
 
-  axiosTest = async () => {
+  axiosTest = async (): Promise<Observable<AxiosResponse<any[]>>> => {
     const result = await this.httpService
       .get('http://localhost:3000/product/detail')
       .toPromise()

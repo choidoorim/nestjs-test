@@ -16,8 +16,11 @@ import { CreateProductDto } from './dto/createProduct.dto';
 import { ForbiddenException } from '../libs/exception/forbidden.exception';
 import { LoggingInterceptor } from '../libs/logging.interceptor';
 import { UserCookie } from 'src/libs/decorator/user.decorator';
-import { createProduct } from './product.decolator.controller';
+import { createProduct } from '../libs/decorator/product.decolator.controller';
 import { Request } from 'express';
+import { Roles } from 'src/libs/decorator/roles.decorator';
+import { Role } from 'src/libs/enums/role.enum';
+import { UserEntity } from './entity/user.entity';
 
 @UseInterceptors(new LoggingInterceptor())
 @Controller('product')
@@ -27,7 +30,7 @@ export class ProductController {
   @Get('detail')
   async forbiddenException() {
     // throw new ForbiddenException();
-    return 'Hello';
+    return { name: 'Choi' };
   }
 
   @Get('numberValidation')
@@ -64,8 +67,7 @@ export class ProductController {
   @Get('axios')
   async axiosTest() {
     const result = await this.productService.axiosTest();
-    console.log(result);
-    return `AxiosResult is ${result}`;
+    return result;
   }
 
   // applyDecorators
@@ -73,6 +75,22 @@ export class ProductController {
   async createProductByDecorator(@Body() user): Promise<string> {
     throw new ForbiddenException();
     return `create Product By Decorator ${user.name}`;
+  }
+
+  @Get('roleDecorator/:roles')
+  @Roles(Role.Admin)
+  roleDecoratorsTest() {
+    return `Role Decorator Test`;
+  }
+
+  @Get('serialization')
+  serializationTest() {
+    return new UserEntity({
+      id: 1,
+      name: 'choi',
+      age: 26,
+      pw: 'asdasdasd',
+    });
   }
 
   @Post()
