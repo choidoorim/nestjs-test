@@ -90,6 +90,10 @@ export class ProductController {
       name: 'choi',
       age: 26,
       pw: 'asdasdasd',
+      product: {
+        name: 'test',
+        price: 24000,
+      },
     });
   }
 
