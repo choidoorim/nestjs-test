@@ -20,7 +20,7 @@ import { createProduct } from '../libs/decorator/product.decolator.controller';
 import { Request } from 'express';
 import { Roles } from 'src/libs/decorator/roles.decorator';
 import { Role } from 'src/libs/enums/role.enum';
-import { UserEntity } from './entity/user.entity';
+import { UserResponseDto } from './dto/userResponse.dto';
 
 @UseInterceptors(new LoggingInterceptor())
 @Controller('product')
@@ -85,15 +85,11 @@ export class ProductController {
 
   @Get('serialization')
   serializationTest() {
-    return new UserEntity({
+    return new UserResponseDto({
       id: 1,
       name: 'choi',
       age: 26,
       pw: 'asdasdasd',
-      product: {
-        name: 'test',
-        price: 24000,
-      },
     });
   }
 
