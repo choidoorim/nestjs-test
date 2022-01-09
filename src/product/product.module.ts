@@ -3,7 +3,7 @@ import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
 import { HttpModule } from '@nestjs/axios';
 import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from 'src/roles.guard';
+import { RolesGuard } from 'src/libs/guards/roles.guard';
 
 @Module({
   controllers: [ProductController],

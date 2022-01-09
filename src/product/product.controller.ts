@@ -21,16 +21,31 @@ import { Request } from 'express';
 import { Roles } from 'src/libs/decorator/roles.decorator';
 import { Role } from 'src/libs/enums/role.enum';
 import { UserResponseDto } from './dto/userResponse.dto';
+import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
+import {
+  ProductDetailRequestDto,
+  ProductDetailResponseDto,
+} from './dto/product-detail.dto';
 
 @UseInterceptors(new LoggingInterceptor())
 @Controller('product')
+@ApiTags('상품 API')
 export class ProductController {
   constructor(private productService: ProductService) {}
 
   @Get('detail')
-  async forbiddenException() {
+  @ApiOperation({ summary: 'detail API', description: '성을 return 한다.' })
+  @ApiCreatedResponse({
+    description: '성 return',
+    type: ProductDetailResponseDto,
+  })
+  async forbiddenException(@Body() product: ProductDetailRequestDto) {
     // throw new ForbiddenException();
-    return { name: 'Choi' };
+    const result: ProductDetailResponseDto = {
+      id: 1,
+      name: product.name,
+    };
+    return result;
   }
 
   @Get('numberValidation')
