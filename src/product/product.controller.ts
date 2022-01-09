@@ -42,7 +42,7 @@ export class ProductController {
   async forbiddenException(@Body() product: ProductDetailRequestDto) {
     // throw new ForbiddenException();
     const result: ProductDetailResponseDto = {
-      id: 1,
+      id: 2,
       name: product.name,
     };
     return result;
