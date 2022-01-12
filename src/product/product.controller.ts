@@ -26,6 +26,7 @@ import {
   ProductDetailRequestDto,
   ProductDetailResponseDto,
 } from './dto/product-detail.dto';
+import { Detail } from './product.controller.decorator';
 
 @UseInterceptors(new LoggingInterceptor())
 @Controller('product')
@@ -33,12 +34,7 @@ import {
 export class ProductController {
   constructor(private productService: ProductService) {}
 
-  @Get('detail')
-  @ApiOperation({ summary: 'detail API', description: '성을 return 한다.' })
-  @ApiCreatedResponse({
-    description: '성 return',
-    type: ProductDetailResponseDto,
-  })
+  @Detail()
   async forbiddenException(@Body() product: ProductDetailRequestDto) {
     // throw new ForbiddenException();
     const result: ProductDetailResponseDto = {
