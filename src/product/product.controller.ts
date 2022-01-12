@@ -16,7 +16,7 @@ import { CreateProductDto } from './dto/createProduct.dto';
 import { ForbiddenException } from '../libs/exception/forbidden.exception';
 import { LoggingInterceptor } from '../libs/logging.interceptor';
 import { UserCookie } from 'src/libs/decorator/user.decorator';
-import { createProduct } from '../libs/decorator/product.decolator.controller';
+import { createProduct } from '../libs/decorator/product.decorator.controller';
 import { Request } from 'express';
 import { Roles } from 'src/libs/decorator/roles.decorator';
 import { Role } from 'src/libs/enums/role.enum';
